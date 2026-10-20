@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Project — Ismael Asumanu Prince</title>
+<meta name="description" content="Case study by Ismael Asumanu Prince.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text y='.9em' font-size='80' font-family='serif' fill='%23ff4500'>P</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --bg:#f6f1e8;--surface:#f2f0ec;--text:#111;--muted:#8a8378;
+  --border:#e0d8c9;--accent:#ff4500;--accent-light:rgba(255,69,0,0.08);
+  --card-bg:#fbf8f2;--modal-bg:#f6f1e8;
+}
+body.dark{
+  --bg:#0d0d0d;--surface:#161616;--text:#f0ede8;--muted:#6b6357;
+  --border:#2a2a2a;--card-bg:#131313;--modal-bg:#0d0d0d;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
+img,video{max-width:100%;display:block;}
+
+/* Header */
+.site-header{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,20px) clamp(20px,4vw,40px);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.logo{color:var(--accent);font-size:clamp(17px,2vw,22px);font-weight:700;text-decoration:none;}
+.header-right{display:flex;align-items:center;gap:6px;}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:none;background:none;color:var(--text);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,background .2s;}
+.icon-btn:hover{color:var(--accent);background:var(--accent-light);}
+.hamburger .fa-bars{display:block;}
+.hamburger .fa-times{display:none;}
+.hamburger.open .fa-bars{display:none;}
+.hamburger.open .fa-times{display:block;}
+.menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);z-index:98;opacity:0;pointer-events:none;transition:opacity .3s;}
+.menu-backdrop.open{opacity:1;pointer-events:all;}
+.menu{position:fixed;top:0;right:-100%;width:min(300px,85vw);height:100vh;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;transition:right .35s;z-index:99;}
+.menu.open{right:0;}
+.menu ul{list-style:none;text-align:center;width:100%;padding:0 2rem;}
+.menu li{margin:4px 0;}
+.menu a{color:var(--text);text-decoration:none;font-size:clamp(17px,3.5vw,21px);font-weight:500;display:block;padding:13px 20px;border-radius:8px;}
+.menu a:hover,.menu a.active{color:var(--accent);background:var(--accent-light);}
+.menu-divider{width:36px;height:2px;background:var(--accent);margin-bottom:2rem;}
+.menu-footer{position:absolute;bottom:2rem;font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+
+/* Hero */
+.project-hero{padding:clamp(100px,15vw,160px) clamp(20px,5vw,80px) clamp(40px,6vw,60px);border-bottom:1px solid var(--border);position:relative;overflow:hidden;max-width:1400px;margin:0 auto;}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:2rem;transition:color .2s;}
+.back-link:hover{color:var(--accent);}
+.project-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,90px);font-weight:600;line-height:1;letter-spacing:-.02em;margin-bottom:1rem;}
+.project-subtitle{font-size:clamp(1rem,2vw,1.4rem);color:var(--muted);font-weight:300;max-width:800px;line-height:1.6;margin-bottom:2rem;}
+.project-meta{display:flex;flex-wrap:wrap;gap:1rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.project-meta .tag{color:var(--accent);background:var(--accent-light);padding:4px 12px;border-radius:2px;font-weight:600;}
+
+/* Content */
+.project-content{max-width:900px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,5vw,40px);}
+.project-description{font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.85;font-weight:300;color:var(--text);}
+.project-description h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;margin:2.5rem 0 1rem;}
+.project-description p{margin-bottom:1.5rem;}
+.project-description ul{list-style-position:inside;margin-bottom:1.5rem;}
+.project-description li{margin-bottom:.5rem;}
+.project-description a{color:var(--accent);text-decoration:underline;}
+
+/* Gallery */
+.project-gallery{max-width:1400px;margin:0 auto;padding:0 clamp(20px,5vw,80px) clamp(80px,10vw,120px);}
+.gallery-grid{columns: 3 300px; column-gap: clamp(20px,4vw,40px);}
+.gallery-item{break-inside: avoid; margin-bottom: clamp(20px,4vw,40px); border:1px solid var(--border); background:var(--surface); border-radius:16px; overflow:hidden; display: block;}
+.gallery-item img,.gallery-item video{width:100%; height:auto; display:block;}
+
+/* Footer */
+.archive-footer{border-top:1px solid var(--border);padding:clamp(40px,6vw,60px) clamp(20px,5vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.archive-footer a{color:var(--accent);text-decoration:none;}
+.archive-footer a:hover{text-decoration:underline;}
+
+/* Loading / Error state */
+.loading-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:1rem;color:var(--muted);}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<div class="menu-backdrop" id="menu-backdrop" onclick="closeMenu()"></div>
+
+<header class="site-header">
+  <a href="index.html" class="logo">Prince</a>
+  <div class="header-right">
+    <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-lightbulb"></i></button>
+    <button class="icon-btn hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <i class="fas fa-bars"></i><i class="fas fa-times"></i>
+    </button>
+  </div>
+</header>
+
+<nav class="menu" id="menu">
+  <div class="menu-divider"></div>
+  <ul>
+    <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+    <li><a href="about.html" onclick="closeMenu()">About</a></li>
+    <li><a href="projects.html" class="active" onclick="closeMenu()">Projects</a></li>
+    <li><a href="archive.html" onclick="closeMenu()">Archive</a></li>
+    <li><a href="booking.html" onclick="closeMenu()">Book Me</a></li>
+  </ul>
+  <p class="menu-footer">© <span id="menu-year"></span> Prince</p>
+</nav>
+
+<main id="app">
+  <div class="loading-state" id="loading">
+    <div class="spinner"></div>
+    <p>Loading project...</p>
+  </div>
+</main>
+
+<footer class="archive-footer">
+  <span>© <span id="footer-year"></span> Ismael Asumanu Prince</span>
+  <span><a href="projects.html">View all projects →</a></span>
+</footer>
+
+<script>
+document.getElementById('menu-year').textContent = new Date().getFullYear();
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+const USER='MawuliPRINCE';
+const REPO='my-portfolio-v2';
+const JSON_URL=`https://raw.githubusercontent.com/${USER}/${REPO}/main/projects.json`;
+
+// ===== THEME =====
+function toggleTheme(){
+  const dark=document.body.classList.contains('dark');
+  document.body.className=dark?'light':'dark';
+  localStorage.setItem('theme',dark?'light':'dark');
+}
+(function(){
+  const saved=localStorage.getItem('theme');
+  if(saved==='dark')document.body.classList.add('dark');
+  else if(saved==='light')document.body.classList.remove('dark');
+  else if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.body.classList.add('dark');
+})();
+
+// ===== MENU =====
+const menuEl=document.getElementById('menu'),backdrop=document.getElementById('menu-backdrop'),hamBtn=document.getElementById('hamburger');
+function openMenu(){menuEl.classList.add('open');backdrop.classList.add('open');hamBtn.classList.add('open');document.body.style.overflow='hidden';}
+function closeMenu(){menuEl.classList.remove('open');backdrop.classList.remove('open');hamBtn.classList.remove('open');document.body.style.overflow='';}
+function toggleMenu(){menuEl.classList.contains('open')?closeMenu():openMenu();}
+
+// ===== HELPERS =====
+function isVideoUrl(url){return /\.(mp4|webm|mov|ogg)(\?|$)/i.test(url)||url.includes('/video/upload/');}
+function clOpt(url){
+  if(!url)return url;
+  if(url.includes('res.cloudinary.com')&&url.includes('/upload/')&&!url.includes('q_auto')){
+    return url.replace('/upload/','/upload/q_auto,f_auto,w_auto/');
+  }
+  return url;
+}
+
+// ===== LOAD =====
+window.addEventListener('DOMContentLoaded', async () => {
+  const params = new URLSearchParams(window.location.search);
+  const projectId = params.get('id');
+  
+  if(!projectId){
+    document.getElementById('app').innerHTML = `<div class="loading-state" style="height:60vh;"><h2>Project not found</h2><a href="projects.html" style="color:var(--accent);margin-top:1rem;">Back to projects</a></div>`;
+    return;
+  }
+
+  try {
+    const res = await fetch(JSON_URL + '?t=' + Date.now());
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const allProjects = await res.json();
+    
+    const project = allProjects.find(p => p.id === projectId);
+    
+    if(!project) {
+      document.getElementById('app').innerHTML = `<div class="loading-state" style="height:60vh;"><h2>Project not found</h2><a href="projects.html" style="color:var(--accent);margin-top:1rem;">Back to projects</a></div>`;
+      return;
+    }
+
+    document.title = (project.seoTitle || project.title) + ' — Ismael Asumanu Prince';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if(metaDesc) metaDesc.setAttribute('content', project.seoDescription || project.subtitle || 'Case study by Ismael Asumanu Prince');
+
+    const media = (project.media || []).filter(m => m.url);
+    const desc = (project.description || '<p>No description provided.</p>').replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+
+    const html = `
+      <section class="project-hero">
+        <a href="projects.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        <h1 class="project-title">${project.title || 'Untitled'}</h1>
+        ${project.subtitle ? `<p class="project-subtitle">${project.subtitle}</p>` : ''}
+        <div class="project-meta">
+          ${project.year ? `<span>${project.year}</span>` : ''}
+          ${(project.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}
+        </div>
+      </section>
+
+      <section class="project-content">
+        <div class="project-description">${desc}</div>
+        ${project.clientTestimonial ? `<div style="margin-top:3rem;padding:2rem;border-left:3px solid var(--accent);background:var(--accent-light);font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;">“${project.clientTestimonial}”</div>` : ''}
+      </section>
+
+      ${media.length ? `
+      <section class="project-gallery">
+        <div class="gallery-grid">
+          ${media.map(m => {
+            const isVid = m.type === 'video' || isVideoUrl(m.url);
+            return `<div class="gallery-item">
+              ${isVid 
+                ? `<video src="${makeVideoWebSafe(m.url)}" muted loop autoplay playsinline controls disablepictureinpicture></video>`
+                : `<img src="${clOpt(m.url)}" alt="${project.title} preview" loading="lazy">`}
+            </div>`;
+          }).join('')}
+        </div>
+      </section>` : ''}
+    `;
+
+    document.getElementById('app').innerHTML = html;
+  } catch(e) {
+    console.error(e);
+    document.getElementById('app').innerHTML = `<div class="loading-state" style="height:60vh;"><h2>Error loading project</h2><p>Please try again later.</p><a href="projects.html" style="color:var(--accent);margin-top:1rem;">Back to projects</a></div>`;
+  }
+});
+</script>
+</body>
+</html>
