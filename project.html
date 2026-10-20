@@ -147,6 +147,12 @@ function toggleMenu(){menuEl.classList.contains('open')?closeMenu():openMenu();}
 
 // ===== HELPERS =====
 function isVideoUrl(url){return /\.(mp4|webm|mov|ogg)(\?|$)/i.test(url)||url.includes('/video/upload/');}
+function makeVideoWebSafe(url){
+  if(!url||typeof url!=='string')return url;
+  if(!url.includes('/video/upload/'))return url;
+  if(/vc_/.test(url))return url;
+  return url.replace('/video/upload/','/video/upload/vc_auto/');
+}
 function clOpt(url){
   if(!url)return url;
   if(url.includes('res.cloudinary.com')&&url.includes('/upload/')&&!url.includes('q_auto')){
