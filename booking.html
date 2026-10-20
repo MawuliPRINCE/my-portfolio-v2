@@ -1,254 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Me — Ismael Asumanu Prince</title>
-    <meta name="description" content="Book Ismael Asumanu Prince for your next design project.">
-    <meta property="og:title" content="Book Me — Ismael Asumanu Prince">
-    <meta property="og:type" content="website">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text y='.9em' font-size='80' font-family='serif' fill='%23ff4500'>P</text></svg>">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Let's Make Something Cool — Ismael Asumanu Prince</title>
+  <meta name="description" content="Get in touch with Ismael Asumanu Prince for design work.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text y='.9em' font-size='80' font-family='serif' fill='%23ff4500'>P</text></svg>">
+  
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://*.cloudinary.com https://raw.githubusercontent.com; media-src 'self' https://*.cloudinary.com; connect-src 'self' https://raw.githubusercontent.com https://api.github.com https://booking-handler.booking-handler.workers.dev https://www.google-analytics.com; frame-src 'self' https://analytics.google.com;">
 
-    <!-- Content Security Policy (allows inline scripts, analytics, worker, and confetti CDN) -->
-    <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self' 'unsafe-inline' 'unsafe-eval';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdn.jsdelivr.net https://www.clarity.ms;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-      font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-      img-src 'self' data: https://*.cloudinary.com https://raw.githubusercontent.com;
-      media-src 'self' https://*.cloudinary.com;
-      connect-src 'self' https://raw.githubusercontent.com https://api.github.com https://booking-handler.booking-handler.workers.dev https://www.google-analytics.com;
-      frame-src 'self' https://analytics.google.com;
-    ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg:#faf9f7; --surface:#f2f0ec; --text:#111; --muted:#888;
+      --border:#e0ddd8; --accent:#ff4500; --accent-dim:rgba(255,69,0,0.08);
+      --footer-bg:#0d0d0d; --footer-text:#f0ede8;
+    }
+    body.dark {
+      --bg:#0d0d0d; --surface:#161616; --text:#f0ede8; --muted:#555;
+      --border:#2a2a2a; --accent-dim:rgba(255,69,0,0.1);
+      --footer-bg:#fff; --footer-text:#111;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text);
+      transition:background .3s,color .3s, opacity 0.3s ease; opacity: 1; min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    
+    /* ── HEADER ── */
+    header { position:fixed; top:0; left:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:clamp(14px,2.5vw,22px) clamp(20px,4vw,40px); background:rgba(250,249,247,0.94); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); transition:background .3s; }
+    body.dark header { background:rgba(13,13,13,0.94); }
+    .logo { color:var(--accent); font-size:clamp(18px,2vw+0.5rem,24px); font-weight:700; text-decoration:none; letter-spacing:-.01em; }
+    .header-right { display:flex; align-items:center; gap:6px; }
+    .icon-btn { width:40px; height:40px; border-radius:50%; border:none; background:none; color:var(--text); font-size:clamp(15px,1.5vw,18px); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:color .2s,background .2s; }
+    .icon-btn:hover { color:var(--accent); background:var(--accent-dim); }
+    .hamburger .fa-bars { display:block; } .hamburger .fa-times { display:none; }
+    .hamburger.open .fa-bars { display:none; } .hamburger.open .fa-times { display:block; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root {
-            --bg:#faf9f7; --surface:#f2f0ec; --text:#111; --muted:#888;
-            --border:#e0ddd8; --accent:#ff4500; --accent-dim:rgba(255,69,0,0.08);
-            --footer-bg:#0d0d0d; --footer-text:#f0ede8;
-        }
-        body.dark {
-            --bg:#0d0d0d; --surface:#161616; --text:#f0ede8; --muted:#555;
-            --border:#2a2a2a; --accent-dim:rgba(255,69,0,0.1);
-            --footer-bg:#fff; --footer-text:#111;
-        }
-        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-        html { scroll-behavior:smooth; }
-        body {
-            font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text);
-            transition:background .3s,color .3s, opacity 0.3s ease;
-            opacity: 1;
-        }
-        body.fade-out { opacity: 0; }
+    /* ── MENU ── */
+    .menu-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s; }
+    .menu-backdrop.open { opacity:1; pointer-events:all; }
+    .menu { position:fixed; top:0; right:-100%; width:min(300px,85vw); height:100vh; background:var(--bg); display:flex; flex-direction:column; justify-content:center; align-items:center; transition:right .35s cubic-bezier(.4,0,.2,1); z-index:99; box-shadow:-8px 0 40px rgba(0,0,0,0.12); }
+    .menu.open { right:0; }
+    .menu ul { list-style:none; text-align:center; width:100%; padding:0 2rem; }
+    .menu li { margin:4px 0; }
+    .menu a { color:var(--text); text-decoration:none; font-size:clamp(18px,4vw,22px); font-weight:500; display:block; padding:14px 20px; border-radius:8px; transition:background .2s,color .2s; }
+    .menu a:hover, .menu a.active { color:var(--accent); background:var(--accent-dim); }
+    .menu-divider { width:36px; height:2px; background:var(--accent); margin-bottom:2rem; }
+    .menu-footer { position:absolute; bottom:2rem; font-size:.65rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
 
-        /* ── HEADER ── */
-        header { position:fixed; top:0; left:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:clamp(14px,2.5vw,22px) clamp(20px,4vw,40px); background:rgba(250,249,247,0.94); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); transition:background .3s; }
-        body.dark header { background:rgba(13,13,13,0.94); }
-        .logo { color:var(--accent); font-size:clamp(18px,2vw+0.5rem,24px); font-weight:700; text-decoration:none; letter-spacing:-.01em; }
-        .header-right { display:flex; align-items:center; gap:6px; }
-        .icon-btn { width:40px; height:40px; border-radius:50%; border:none; background:none; color:var(--text); font-size:clamp(15px,1.5vw,18px); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:color .2s,background .2s; }
-        .icon-btn:hover { color:var(--accent); background:var(--accent-dim); }
-        .lang-select { appearance:none; -webkit-appearance:none; background:var(--surface); border:1px solid var(--border); color:var(--text); font-family:'DM Sans',sans-serif; font-size:.72rem; font-weight:500; letter-spacing:.08em; padding:6px 28px 6px 10px; border-radius:20px; cursor:pointer; outline:none; transition:border-color .2s; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; }
-        .lang-select:hover { border-color:var(--accent); }
-        .hamburger .fa-bars { display:block; } .hamburger .fa-times { display:none; }
-        .hamburger.open .fa-bars { display:none; } .hamburger.open .fa-times { display:block; }
+    /* ── PAGE ── */
+    .page { padding-top:clamp(70px,10vw,90px); flex: 1; display: flex; flex-direction: column; }
 
-        /* ── MENU ── */
-        .menu-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:98; opacity:0; pointer-events:none; transition:opacity .3s; }
-        .menu-backdrop.open { opacity:1; pointer-events:all; }
-        .menu { position:fixed; top:0; right:-100%; width:min(300px,85vw); height:100vh; background:var(--bg); display:flex; flex-direction:column; justify-content:center; align-items:center; transition:right .35s cubic-bezier(.4,0,.2,1); z-index:99; box-shadow:-8px 0 40px rgba(0,0,0,0.12); }
-        .menu.open { right:0; }
-        .menu ul { list-style:none; text-align:center; width:100%; padding:0 2rem; }
-        .menu li { margin:4px 0; }
-        .menu a { color:var(--text); text-decoration:none; font-size:clamp(18px,4vw,22px); font-weight:500; display:block; padding:14px 20px; border-radius:8px; transition:background .2s,color .2s; }
-        .menu a:hover, .menu a.active { color:var(--accent); background:var(--accent-dim); }
-        .menu-divider { width:36px; height:2px; background:var(--accent); margin-bottom:2rem; }
-        .menu-footer { position:absolute; bottom:2rem; font-size:.65rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+    /* ── HERO ── */
+    .booking-hero {
+      padding:clamp(60px,10vw,100px) clamp(20px,5vw,80px) clamp(40px,6vw,60px);
+      position:relative; overflow:hidden; border-bottom:1px solid var(--border);
+    }
+    .booking-hero::before {
+      content:'CHAT'; position:absolute; right:-10px; top:50%; transform:translateY(-50%);
+      font-family:'Cormorant Garamond',serif; font-size:clamp(100px,18vw,220px); font-weight:600;
+      color:var(--border); letter-spacing:-.04em; pointer-events:none; user-select:none; line-height:1; opacity: 0.5;
+    }
+    .eyebrow { font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; display:flex; align-items:center; gap:.75rem; }
+    .eyebrow::after { content:''; width:40px; height:1px; background:var(--accent); }
+    .booking-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(42px,7vw,88px); font-weight:600; line-height:1.05; letter-spacing:-.02em; margin-bottom:1.25rem; position: relative; z-index: 1;}
+    .booking-hero h1 em { font-style:italic; color:var(--accent); }
+    .booking-hero p { font-size:clamp(15px,1.8vw,18px); color:var(--muted); max-width:560px; line-height:1.7; font-weight:300; position: relative; z-index: 1;}
+    
+    /* ── FORM SECTION ── */
+    .form-section {
+      display:grid; grid-template-columns: 1fr 340px;
+      gap:clamp(32px,5vw,64px);
+      max-width:1100px; margin:0 auto;
+      padding:clamp(48px,7vw,80px) clamp(20px,5vw,80px);
+      align-items:start; width: 100%;
+    }
 
-        /* ── PAGE ── */
-        .page { padding-top:clamp(70px,10vw,90px); }
+    /* ── FORM ── */
+    .booking-form { display:flex; flex-direction:column; gap:1.5rem; }
+    .form-group { display:flex; flex-direction:column; gap:.5rem; }
+    .form-group label { font-size:.62rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+    .form-group input, .form-group textarea {
+        background:var(--surface); border:1px solid var(--border); color:var(--text);
+        padding:1rem 1.2rem; font-size:.95rem; font-family:'DM Sans',sans-serif;
+        outline:none; border-radius:6px; transition:border-color .2s, box-shadow .2s;
+        width:100%;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+        border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-dim);
+    }
+    .form-group textarea { min-height:160px; resize:vertical; }
 
-        /* ── HERO STRIP ── */
-        .booking-hero {
-            padding:clamp(60px,10vw,100px) clamp(20px,5vw,80px) clamp(40px,6vw,60px);
-            position:relative; overflow:hidden;
-            border-bottom:1px solid var(--border);
-        }
-        .booking-hero::before {
-            content:'BOOK'; position:absolute; right:-10px; top:50%; transform:translateY(-50%);
-            font-family:'Cormorant Garamond',serif; font-size:clamp(80px,14vw,160px); font-weight:600;
-            color:var(--border); letter-spacing:-.04em; pointer-events:none; user-select:none; line-height:1;
-        }
-        .eyebrow { font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; display:flex; align-items:center; gap:.75rem; }
-        .eyebrow::after { content:''; width:40px; height:1px; background:var(--accent); }
-        .booking-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(36px,6vw,72px); font-weight:600; line-height:1.05; letter-spacing:-.02em; margin-bottom:1rem; }
-        .booking-hero h1 em { font-style:italic; color:var(--accent); }
-        .booking-hero p { font-size:clamp(14px,1.5vw,17px); color:var(--muted); max-width:520px; line-height:1.7; font-weight:300; }
+    /* Submit button */
+    .submit-btn {
+      display:inline-flex; align-items:center; gap:.75rem; justify-content: center;
+      font-size:.75rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+      color:#fff; background:var(--accent); border:none; padding:1.1rem 2rem;
+      border-radius:6px; cursor:pointer; transition:background .2s, transform .2s;
+      font-family:'DM Sans',sans-serif; width:100%; margin-top: 1rem;
+    }
+    .submit-btn:hover { background:#e03a00; transform:translateY(-1px); }
+    .submit-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
 
-        /* ── FORM SECTION ── */
-        .form-section {
-            display:grid; grid-template-columns:1fr 340px;
-            gap:clamp(32px,5vw,64px);
-            max-width:1100px; margin:0 auto;
-            padding:clamp(48px,7vw,80px) clamp(20px,5vw,80px);
-            align-items:start;
-        }
+    /* Success/Error state */
+    .success-msg { display:none; background:rgba(68,204,136,0.08); border:1px solid rgba(68,204,136,0.3); padding:1.25rem 1.5rem; border-radius:6px; color:#44cc88; font-size:.9rem; line-height:1.6; text-align:center; }
+    .error-msg { display:none; background:rgba(255,68,68,0.08); border:1px solid rgba(255,68,68,0.3); padding:1rem 1.25rem; border-radius:6px; color:#ff4444; font-size:.82rem; }
 
-        /* ── FORM ── */
-        .booking-form { display:flex; flex-direction:column; gap:1.25rem; }
+    /* ── SIDEBAR INFO ── */
+    .booking-info { display:flex; flex-direction:column; gap:1.25rem; }
+    .info-card { background:var(--surface); border:1px solid var(--border); padding:1.5rem; border-radius: 6px; position:relative; }
+    .info-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--accent); border-radius: 6px 0 0 6px; }
+    .info-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; margin-bottom:.75rem; }
+    .info-card p { font-size:.85rem; color:var(--muted); line-height:1.7; }
+    
+    .direct-email { 
+        display: flex; align-items: center; gap: 1rem; margin-top: 1rem; padding: 1rem; 
+        background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+        text-decoration: none; color: var(--text); transition: border-color 0.2s;
+    }
+    .direct-email:hover { border-color: var(--accent); }
+    .direct-email i { color: var(--accent); font-size: 1.2rem; }
+    .direct-email span { font-size: 0.9rem; font-weight: 500; }
 
-        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    /* ── FOOTER ── */
+    footer { background:var(--footer-bg); color:var(--footer-text); padding:clamp(40px,6vw,60px) clamp(20px,5vw,80px); border-top:1px solid var(--border); margin-top: auto; }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-size:.7rem; opacity:.5; }
+    .go-to-top { width:44px; height:44px; border-radius:50%; background:var(--accent); border:none; color:#fff; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .2s,background .2s; }
+    .go-to-top:hover { transform:translateY(-3px); background:#e03a00; }
 
-        .form-group { display:flex; flex-direction:column; gap:.4rem; }
-        .form-group label { font-size:.62rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            background:var(--surface); border:1px solid var(--border); color:var(--text);
-            padding:.75rem 1rem; font-size:.9rem; font-family:'DM Sans',sans-serif;
-            outline:none; border-radius:3px; transition:border-color .2s, box-shadow .2s;
-            width:100%;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-dim);
-        }
-        .form-group textarea { min-height:140px; resize:vertical; }
-        .form-group select { appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; }
+    .scroll-top-btn { position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.2s; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .scroll-top-btn.visible { opacity: 1; pointer-events: all; }
+    .scroll-top-btn:hover { transform: translateY(-3px); }
 
-        /* Project types pills */
-        .type-pills { display:flex; flex-wrap:wrap; gap:.5rem; }
-        .type-pill {
-            font-size:.65rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
-            padding:6px 14px; border:1px solid var(--border); border-radius:20px;
-            cursor:pointer; transition:all .2s; color:var(--muted); background:none;
-            font-family:'DM Sans',sans-serif;
-        }
-        .type-pill:hover { border-color:var(--accent); color:var(--accent); }
-        .type-pill.selected { background:var(--accent); border-color:var(--accent); color:#fff; }
+    @media (max-width:768px) {
+        .form-section { grid-template-columns:1fr; }
+        .booking-hero::before { display: none; }
+        .page { padding-top: 60px; }
+    }
+  </style>
 
-        /* Submit button */
-        .submit-btn {
-            display:inline-flex; align-items:center; gap:.75rem;
-            font-size:.75rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
-            color:#fff; background:var(--accent); border:none; padding:1rem 2rem;
-            border-radius:40px; cursor:pointer; transition:background .2s, transform .2s;
-            font-family:'DM Sans',sans-serif; width:100%; justify-content:center;
-        }
-        .submit-btn:hover { background:#e03a00; transform:translateY(-1px); }
-        .submit-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
-
-        /* Success state */
-        .success-msg {
-            display:none; background:rgba(68,204,136,0.08); border:1px solid rgba(68,204,136,0.3);
-            padding:1.25rem 1.5rem; border-radius:4px; color:#44cc88;
-            font-size:.88rem; line-height:1.6; text-align:center;
-        }
-
-        /* Error state */
-        .error-msg {
-            display:none; background:rgba(255,68,68,0.08); border:1px solid rgba(255,68,68,0.3);
-            padding:1rem 1.25rem; border-radius:4px; color:#ff4444; font-size:.82rem;
-        }
-
-        /* ── SIDEBAR INFO ── */
-        .booking-info { display:flex; flex-direction:column; gap:1rem; }
-
-        .info-card {
-            background:var(--surface); border:1px solid var(--border); padding:1.5rem;
-            position:relative;
-        }
-        .info-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--accent); }
-
-        .info-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; margin-bottom:.75rem; }
-        .info-card p { font-size:.82rem; color:var(--muted); line-height:1.7; }
-
-        .info-list { list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-top:.75rem; }
-        .info-list li { display:flex; align-items:center; gap:.75rem; font-size:.82rem; color:var(--muted); }
-        .info-list li i { color:var(--accent); width:16px; text-align:center; font-size:.85rem; }
-
-        .turnaround { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-top:.75rem; }
-        .turnaround-item { background:var(--bg); border:1px solid var(--border); padding:.75rem; text-align:center; }
-        .turnaround-type { font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
-        .turnaround-time { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--accent); margin-top:.2rem; }
-
-        /* ── FOOTER ── */
-        footer { background:var(--footer-bg); color:var(--footer-text); padding:clamp(40px,6vw,60px) clamp(20px,5vw,80px); border-top:1px solid var(--border); }
-        .footer-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-size:.7rem; opacity:.5; }
-        .go-to-top { width:44px; height:44px; border-radius:50%; background:var(--accent); border:none; color:#fff; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .2s,background .2s; }
-        .go-to-top:hover { transform:translateY(-3px); background:#e03a00; }
-
-        /* Smart scroll button */
-        .scroll-top-btn {
-            position: fixed; bottom: 2rem; right: 2rem;
-            width: 48px; height: 48px; border-radius: 50%;
-            background: var(--accent); color: #fff; border: none;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s, transform 0.2s;
-            z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .scroll-top-btn.visible { opacity: 1; pointer-events: all; }
-        .scroll-top-btn:hover { transform: translateY(-3px); }
-        .scroll-progress-ring {
-            position: absolute; top: -4px; left: -4px;
-            width: 56px; height: 56px;
-            transform: rotate(-90deg);
-        }
-        .scroll-progress-ring circle {
-            fill: none; stroke: var(--accent); stroke-width: 3;
-            stroke-dasharray: 157; stroke-dashoffset: 157;
-            transition: stroke-dashoffset 0.1s linear;
-            opacity: 0.6;
-        }
-
-        /* Celebration animation */
-        .celebration-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-            pointer-events: none; z-index: 10000;
-        }
-        .celebration-character {
-            width: 120px;
-            animation: bounceIn 0.6s ease;
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0); opacity: 0; }
-            60% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @media (max-width:768px) {
-            .form-section { grid-template-columns:1fr; }
-            .form-row { grid-template-columns:1fr; }
-            .booking-hero::before { display:none; }
-            .turnaround { grid-template-columns:1fr 1fr; }
-        }
-    </style>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RNQ0C2YB4D"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RNQ0C2YB4D');
-    </script>
-
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "xbuxkrh18o");
-    </script>
-
-    <!-- Confetti library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+  <!-- Google Analytics & Clarity -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RNQ0C2YB4D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RNQ0C2YB4D');
+  </script>
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "xbuxkrh18o");
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </head>
 <body>
 
@@ -257,10 +170,6 @@
 <header>
     <a href="index.html" class="logo">Prince</a>
     <div class="header-right">
-        <select class="lang-select" id="lang-select" onchange="switchLang(this.value)" aria-label="Language">
-            <option value="en">EN</option><option value="fr">FR</option>
-            <option value="es">ES</option><option value="de">DE</option>
-        </select>
         <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-lightbulb"></i></button>
         <button class="icon-btn hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
             <i class="fas fa-bars"></i><i class="fas fa-times"></i>
@@ -271,10 +180,11 @@
 <nav class="menu" id="menu">
     <div class="menu-divider"></div>
     <ul>
-        <li><a href="index.html"    onclick="closeMenu()" data-i18n="nav-home">Home</a></li>
-        <li><a href="about.html"    onclick="closeMenu()" data-i18n="nav-about">About</a></li>
-        <li><a href="projects.html" onclick="closeMenu()" data-i18n="nav-projects">Projects</a></li>
-        <li><a href="booking.html"  onclick="closeMenu()" class="active" data-i18n="nav-booking">Book Me</a></li>
+        <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+        <li><a href="about.html" onclick="closeMenu()">About</a></li>
+        <li><a href="projects.html" onclick="closeMenu()">Projects</a></li>
+        <li><a href="archive.html" onclick="closeMenu()">Archive</a></li>
+        <li><a href="booking.html" onclick="closeMenu()" class="active">Book Me</a></li>
     </ul>
     <p class="menu-footer">© <span id="menu-year"></span> Prince</p>
 </nav>
@@ -283,9 +193,9 @@
 
     <!-- HERO -->
     <section class="booking-hero">
-        <p class="eyebrow" data-i18n="booking-eyebrow">Let's Work Together</p>
-        <h1 data-i18n="booking-headline">Start your next<br><em>project</em></h1>
-        <p data-i18n="booking-sub">Fill out the form and I'll get back to you within 24 hours. Every great project starts with a conversation.</p>
+        <p class="eyebrow">Get in Touch</p>
+        <h1>Let's make<br>something <em>cool</em></h1>
+        <p>No lengthy briefs or corporate forms needed. Tell me what you have in mind, and we'll figure out the rest together.</p>
     </section>
 
     <!-- FORM + INFO -->
@@ -294,86 +204,32 @@
         <!-- FORM -->
         <div>
             <div class="success-msg" id="success-msg">
-                <i class="fas fa-check-circle" style="font-size:1.5rem;display:block;margin-bottom:.5rem;"></i>
-                <strong>Message received!</strong><br>
-                Thank you for reaching out. I'll be in touch within 24 hours.
+                <i class="fas fa-check-circle" style="font-size:2rem;display:block;margin-bottom:.5rem; color:var(--accent);"></i>
+                <strong style="font-size: 1.2rem;">Message received!</strong><br>
+                Thank you for reaching out. I'll be in touch soon.
             </div>
             <div class="error-msg" id="error-msg"></div>
 
             <form class="booking-form" id="booking-form" onsubmit="submitBooking(event)">
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label data-i18n="field-name">Full Name *</label>
-                        <input type="text" id="f-name" required placeholder="Your name"/>
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="field-email">Email Address *</label>
-                        <input type="email" id="f-email" required placeholder="you@email.com"/>
-                    </div>
+                <div class="form-group">
+                    <label>What's your name? *</label>
+                    <input type="text" id="f-name" required placeholder="Your name"/>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label data-i18n="field-phone">Phone (optional)</label>
-                        <input type="tel" id="f-phone" placeholder="+233 …"/>
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="field-company">Company / Brand</label>
-                        <input type="text" id="f-company" placeholder="Your brand or company"/>
-                    </div>
+                
+                <div class="form-group">
+                    <label>What's your email? *</label>
+                    <input type="email" id="f-email" required placeholder="you@email.com"/>
                 </div>
 
                 <div class="form-group">
-                    <label data-i18n="field-type">Project Type *</label>
-                    <div class="type-pills" id="type-pills">
-                        <button type="button" class="type-pill" onclick="selectType(this)">Brand Identity</button>
-                        <button type="button" class="type-pill" onclick="selectType(this)">Logo Design</button>
-                        <button type="button" class="type-pill" onclick="selectType(this)">Print Design</button>
-                        <button type="button" class="type-pill" onclick="selectType(this)">Social Media</button>
-                        <button type="button" class="type-pill" onclick="selectType(this)">Packaging</button>
-                        <button type="button" class="type-pill" onclick="selectType(this)">Other</button>
-                    </div>
-                    <input type="hidden" id="f-type" required/>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label data-i18n="field-budget">Budget Range *</label>
-                        <select id="f-budget" required>
-                            <option value="" disabled selected>Select a range</option>
-                            <option>Under $200</option>
-                            <option>$200 – $500</option>
-                            <option>$500 – $1,000</option>
-                            <option>$1,000 – $2,500</option>
-                            <option>$2,500+</option>
-                            <option>Let's discuss</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="field-timeline">Timeline *</label>
-                        <select id="f-timeline" required>
-                            <option value="" disabled selected>When do you need it?</option>
-                            <option>ASAP (rush)</option>
-                            <option>1–2 weeks</option>
-                            <option>2–4 weeks</option>
-                            <option>1–2 months</option>
-                            <option>Flexible</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label data-i18n="field-message">Project Details *</label>
-                    <textarea id="f-message" required placeholder="Tell me about your project — what you need, your vision, goals, target audience…"></textarea>
+                    <label>Tell me about your vision *</label>
+                    <textarea id="f-message" required placeholder="What are we making? The brand, the goals, the vibe..."></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn" id="submit-btn">
-                    <span data-i18n="submit-btn">Send Booking Request</span>
-                    <i class="fas fa-arrow-right"></i>
+                    Send Message <i class="fas fa-paper-plane"></i>
                 </button>
-
-                <p style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.5rem;" data-i18n="submit-note">I respond within 24 hours. No spam, ever.</p>
 
             </form>
         </div>
@@ -381,41 +237,17 @@
         <!-- SIDEBAR INFO -->
         <div class="booking-info">
             <div class="info-card">
-                <h3 data-i18n="info-process-title">My Process</h3>
-                <ul class="info-list">
-                    <li><i class="fas fa-comments"></i> <span data-i18n="process-1">Discovery call & brief</span></li>
-                    <li><i class="fas fa-pencil-ruler"></i> <span data-i18n="process-2">Concept development</span></li>
-                    <li><i class="fas fa-sync-alt"></i> <span data-i18n="process-3">Revisions & refinement</span></li>
-                    <li><i class="fas fa-check-double"></i> <span data-i18n="process-4">Final delivery & files</span></li>
-                </ul>
+                <h3>Prefer to just email?</h3>
+                <p>If forms aren't your thing, you can reach me directly. I read every message.</p>
+                <a href="mailto:princeismaelasumanu@gmail.com" class="direct-email">
+                    <i class="fas fa-envelope"></i>
+                    <span>princeismaelasumanu@gmail.com</span>
+                </a>
             </div>
+            
             <div class="info-card">
-                <h3 data-i18n="info-turnaround-title">Typical Turnaround</h3>
-                <div class="turnaround">
-                    <div class="turnaround-item">
-                        <div class="turnaround-type" data-i18n="turn-logo">Logo</div>
-                        <div class="turnaround-time">1–2w</div>
-                    </div>
-                    <div class="turnaround-item">
-                        <div class="turnaround-type" data-i18n="turn-brand">Branding</div>
-                        <div class="turnaround-time">2–4w</div>
-                    </div>
-                    <div class="turnaround-item">
-                        <div class="turnaround-type" data-i18n="turn-print">Print</div>
-                        <div class="turnaround-time">3–7d</div>
-                    </div>
-                    <div class="turnaround-item">
-                        <div class="turnaround-type" data-i18n="turn-social">Social</div>
-                        <div class="turnaround-time">2–5d</div>
-                    </div>
-                </div>
-            </div>
-            <div class="info-card">
-                <h3 data-i18n="info-contact-title">Direct Contact</h3>
-                <p data-i18n="info-contact-body">Prefer to reach out directly? I'm reachable on all platforms.</p>
-                <ul class="info-list" style="margin-top:.75rem;" id="contact-links">
-                    <li><i class="fas fa-envelope"></i> <a href="#" id="contact-email" style="color:var(--accent);text-decoration:none;">Loading…</a></li>
-                </ul>
+                <h3>Availability</h3>
+                <p>I usually respond within 24 hours. I'm open for freelance projects, brand collaborations, and interesting ideas.</p>
             </div>
         </div>
     </div>
@@ -429,131 +261,60 @@
 
 </div>
 
-<!-- Celebration overlay (cartoon + confetti) -->
-<div class="celebration-container" id="celebration" style="display:none;">
-    <svg class="celebration-character" viewBox="0 0 100 100" fill="none">
-        <rect x="20" y="30" width="60" height="40" rx="4" fill="var(--accent)"/>
-        <path d="M20 30 L50 55 L80 30" stroke="#fff" stroke-width="3" fill="none"/>
-        <circle cx="40" cy="45" r="3" fill="#fff"/>
-        <circle cx="60" cy="45" r="3" fill="#fff"/>
-    </svg>
-</div>
-
-<!-- Smart scroll button -->
 <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-    <svg class="scroll-progress-ring" viewBox="0 0 56 56">
-        <circle cx="28" cy="28" r="25"></circle>
-    </svg>
     <i class="fas fa-arrow-up" style="font-size:1.2rem; z-index:1;"></i>
 </button>
 
 <script>
-    document.getElementById('menu-year').textContent =
-    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    document.getElementById('menu-year').textContent = document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // ── THEME ─────────────────────────────────────────────────────
+    // THEME
     function toggleTheme() { document.body.classList.toggle('dark'); localStorage.setItem('theme', document.body.classList.contains('dark')?'dark':'light'); }
     (function() {
         const saved = localStorage.getItem('theme');
         if (saved === 'dark' || saved === 'light') {
             if (saved === 'dark') document.body.classList.add('dark');
         } else {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (prefersDark) document.body.classList.add('dark');
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.classList.add('dark');
         }
     })();
 
-    // ── MENU ──────────────────────────────────────────────────────
+    // MENU
     const menuEl=document.getElementById('menu'), backdrop=document.getElementById('menu-backdrop'), hamBtn=document.getElementById('hamburger');
     function openMenu()  { menuEl.classList.add('open'); backdrop.classList.add('open'); hamBtn.classList.add('open'); document.body.style.overflow='hidden'; }
     function closeMenu() { menuEl.classList.remove('open'); backdrop.classList.remove('open'); hamBtn.classList.remove('open'); document.body.style.overflow=''; }
     function toggleMenu(){ menuEl.classList.contains('open')?closeMenu():openMenu(); }
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeMenu(); });
-    let mTX=0;
-    menuEl.addEventListener('touchstart',e=>{mTX=e.touches[0].clientX;},{passive:true});
-    menuEl.addEventListener('touchend',e=>{if(e.changedTouches[0].clientX-mTX>60)closeMenu();},{passive:true});
 
-    // ── PROJECT TYPE PILLS ────────────────────────────────────────
-    let selectedType='';
-    function selectType(btn){
-        document.querySelectorAll('.type-pill').forEach(p=>p.classList.remove('selected'));
-        btn.classList.add('selected');
-        selectedType=btn.textContent;
-        document.getElementById('f-type').value=selectedType;
-    }
-
-    // ── LOAD HOME DATA (for email link) ───────────────────────────
-    const HOME_URL='https://raw.githubusercontent.com/MawuliPRINCE/my-portfolio/main/site-home.json';
-    fetch(HOME_URL+'?t='+Date.now()).then(r=>r.ok?r.json():null).then(d=>{
-        if(!d)return;
-        if(d.email){ const el=document.getElementById('contact-email'); el.href='mailto:'+d.email; el.textContent=d.email; }
-    }).catch(()=>{});
-
-    // ── SMART SCROLL BUTTON ─────────────────────────────────────
+    // SCROLL TOP
     const scrollBtn = document.getElementById('scrollTopBtn');
-    const progressCircle = document.querySelector('.scroll-progress-ring circle');
-    const circumference = 2 * Math.PI * 25;
+    window.addEventListener('scroll', () => { scrollBtn.classList.toggle('visible', window.scrollY > 300); }, {passive: true});
 
-    function updateScrollProgress() {
-        const scrollY = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = docHeight ? Math.min(scrollY / docHeight, 1) : 0;
-
-        if (scrollY > 300) scrollBtn.classList.add('visible');
-        else scrollBtn.classList.remove('visible');
-
-        if (progressCircle) {
-            const offset = circumference - scrollPercent * circumference;
-            progressCircle.style.strokeDashoffset = offset;
-        }
-    }
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
-    updateScrollProgress();
-
-    // ── PAGE TRANSITIONS ───────────────────────────────────────
-    document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"])').forEach(link => {
-        if (link.hostname === window.location.hostname || link.hostname === 'mawuliprince.github.io') {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                document.body.classList.add('fade-out');
-                setTimeout(() => { window.location = href; }, 300);
-            });
-        }
-    });
-
-    // ── SUBMIT (with celebration) ─────────────────────────────────
+    // SUBMIT (Modified for the simplified form)
     async function submitBooking(e){
         e.preventDefault();
-        const btn       = document.getElementById('submit-btn');
-        const errEl     = document.getElementById('error-msg');
+        const btn = document.getElementById('submit-btn');
+        const errEl = document.getElementById('error-msg');
         const successEl = document.getElementById('success-msg');
-        const formEl    = document.getElementById('booking-form');
+        const formEl = document.getElementById('booking-form');
         errEl.style.display = 'none';
 
-        if(!selectedType){
-            errEl.textContent = 'Please select a project type.';
-            errEl.style.display = 'block';
-            return;
-        }
-
         const submission = {
-            id:          'booking_' + Date.now(),
-            date:         new Date().toISOString(),
-            name:         document.getElementById('f-name').value.trim(),
-            email:        document.getElementById('f-email').value.trim(),
-            phone:        document.getElementById('f-phone').value.trim(),
-            company:      document.getElementById('f-company').value.trim(),
-            projectType:  selectedType,
-            budget:       document.getElementById('f-budget').value,
-            timeline:     document.getElementById('f-timeline').value,
-            message:      document.getElementById('f-message').value.trim(),
-            read:         false,
-            replied:      false
+            id: 'booking_' + Date.now(),
+            date: new Date().toISOString(),
+            name: document.getElementById('f-name').value.trim(),
+            email: document.getElementById('f-email').value.trim(),
+            phone: '',
+            company: '',
+            projectType: 'General Inquiry',
+            budget: 'N/A',
+            timeline: 'N/A',
+            message: document.getElementById('f-message').value.trim(),
+            read: false,
+            replied: false
         };
 
         btn.disabled = true;
-        btn.querySelector('span').textContent = 'Sending…';
+        btn.innerHTML = 'Sending...';
 
         try {
             const res = await fetch('https://booking-handler.booking-handler.workers.dev', {
@@ -569,109 +330,15 @@
         }
 
         btn.disabled = false;
-        btn.querySelector('span').textContent = 'Send Booking Request';
+        btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
         formEl.style.display = 'none';
         successEl.style.display = 'block';
         successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // 🎉 Celebration
-        const celebration = document.getElementById('celebration');
-        if (celebration) {
-            celebration.style.display = 'flex';
-            setTimeout(() => { celebration.style.display = 'none'; }, 2000);
-        }
         if (typeof confetti === 'function') {
-            confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ff4500', '#ffffff', '#111111'] });
         }
     }
-
-    // ── LANGUAGE ──────────────────────────────────────────────────
-    const i18n={
-        en:{
-            'nav-home':'Home','nav-about':'About','nav-projects':'Projects','nav-booking':'Book Me',
-            'booking-eyebrow':'Let\'s Work Together','booking-headline':'Start your next<br><em>project</em>',
-            'booking-sub':'Fill out the form and I\'ll get back to you within 24 hours.',
-            'field-name':'Full Name *','field-email':'Email Address *','field-phone':'Phone (optional)',
-            'field-company':'Company / Brand','field-type':'Project Type *','field-budget':'Budget Range *',
-            'field-timeline':'Timeline *','field-message':'Project Details *',
-            'submit-btn':'Send Booking Request','submit-note':'I respond within 24 hours. No spam, ever.',
-            'info-process-title':'My Process','process-1':'Discovery call & brief','process-2':'Concept development',
-            'process-3':'Revisions & refinement','process-4':'Final delivery & files',
-            'info-turnaround-title':'Typical Turnaround','turn-logo':'Logo','turn-brand':'Branding','turn-print':'Print','turn-social':'Social',
-            'info-contact-title':'Direct Contact','info-contact-body':'Prefer to reach out directly? I\'m reachable on all platforms.',
-        },
-        fr:{
-            'nav-home':'Accueil','nav-about':'À Propos','nav-projects':'Projets','nav-booking':'Me Réserver',
-            'booking-eyebrow':'Travaillons Ensemble','booking-headline':'Démarrez votre<br><em>projet</em>',
-            'booking-sub':'Remplissez le formulaire et je vous répondrai dans les 24 heures.',
-            'field-name':'Nom complet *','field-email':'Adresse email *','field-phone':'Téléphone (optionnel)',
-            'field-company':'Entreprise / Marque','field-type':'Type de projet *','field-budget':'Budget *',
-            'field-timeline':'Délai *','field-message':'Détails du projet *',
-            'submit-btn':'Envoyer la demande','submit-note':'Je réponds dans les 24h. Pas de spam.',
-            'info-process-title':'Mon Processus','process-1':'Appel découverte','process-2':'Développement du concept',
-            'process-3':'Révisions et affinement','process-4':'Livraison finale',
-            'info-turnaround-title':'Délais habituels','turn-logo':'Logo','turn-brand':'Branding','turn-print':'Impression','turn-social':'Réseaux',
-            'info-contact-title':'Contact direct','info-contact-body':'Préférez-vous me contacter directement ?',
-        },
-        es:{
-            'nav-home':'Inicio','nav-about':'Acerca','nav-projects':'Proyectos','nav-booking':'Reservarme',
-            'booking-eyebrow':'Trabajemos Juntos','booking-headline':'Empieza tu próximo<br><em>proyecto</em>',
-            'booking-sub':'Completa el formulario y te responderé en 24 horas.',
-            'field-name':'Nombre completo *','field-email':'Correo electrónico *','field-phone':'Teléfono (opcional)',
-            'field-company':'Empresa / Marca','field-type':'Tipo de proyecto *','field-budget':'Presupuesto *',
-            'field-timeline':'Plazo *','field-message':'Detalles del proyecto *',
-            'submit-btn':'Enviar solicitud','submit-note':'Respondo en 24 horas. Sin spam.',
-            'info-process-title':'Mi Proceso','process-1':'Llamada de descubrimiento','process-2':'Desarrollo del concepto',
-            'process-3':'Revisiones y refinamiento','process-4':'Entrega final',
-            'info-turnaround-title':'Plazos habituales','turn-logo':'Logo','turn-brand':'Marca','turn-print':'Impresión','turn-social':'Redes',
-            'info-contact-title':'Contacto directo','info-contact-body':'¿Prefieres contactarme directamente?',
-        },
-        de:{
-            'nav-home':'Startseite','nav-about':'Über mich','nav-projects':'Projekte','nav-booking':'Buchen',
-            'booking-eyebrow':'Lass uns zusammenarbeiten','booking-headline':'Starte dein nächstes<br><em>Projekt</em>',
-            'booking-sub':'Fülle das Formular aus und ich melde mich innerhalb von 24 Stunden.',
-            'field-name':'Vollständiger Name *','field-email':'E-Mail-Adresse *','field-phone':'Telefon (optional)',
-            'field-company':'Unternehmen / Marke','field-type':'Projekttyp *','field-budget':'Budget *',
-            'field-timeline':'Zeitplan *','field-message':'Projektdetails *',
-            'submit-btn':'Anfrage senden','submit-note':'Ich antworte innerhalb von 24 Stunden.',
-            'info-process-title':'Mein Prozess','process-1':'Erstgespräch','process-2':'Konzeptentwicklung',
-            'process-3':'Überarbeitungen','process-4':'Finale Lieferung',
-            'info-turnaround-title':'Typische Bearbeitungszeit','turn-logo':'Logo','turn-brand':'Branding','turn-print':'Druck','turn-social':'Social',
-            'info-contact-title':'Direktkontakt','info-contact-body':'Lieber direkt Kontakt aufnehmen?',
-        },
-    };
-    let currentLang=localStorage.getItem('lang')||'en';
-    document.getElementById('lang-select').value=currentLang;
-    function switchLang(lang){currentLang=lang;localStorage.setItem('lang',lang);applyLang(lang);}
-    function applyLang(lang){
-        const t=i18n[lang]||i18n.en;
-        document.querySelectorAll('[data-i18n]').forEach(el=>{
-            const key=el.getAttribute('data-i18n');
-            if(t[key]!==undefined) el.innerHTML=t[key];
-        });
-        document.documentElement.lang=lang;
-    }
-    applyLang(currentLang);
-</script>
-<!-- Core Web Vitals → GA4 -->
-<script src="https://cdn.jsdelivr.net/npm/web-vitals@4/dist/web-vitals.iife.js" defer></script>
-<script>
-  window.addEventListener('load', function(){
-    if(!window.webVitals) return;
-    function send(name, value){
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'web_vitals',
-        metric_name: name,
-        metric_value: Math.round(name === 'CLS' ? value * 1000 : value)
-      });
-    }
-    window.webVitals.onLCP(function(m){ send('LCP', m.value); });
-    window.webVitals.onCLS(function(m){ send('CLS', m.value); });
-    window.webVitals.onINP(function(m){ send('INP', m.value); });
-    window.webVitals.onTTFB(function(m){ send('TTFB', m.value); });
-    window.webVitals.onFCP(function(m){ send('FCP', m.value); });
-  });
 </script>
 </body>
 </html>
