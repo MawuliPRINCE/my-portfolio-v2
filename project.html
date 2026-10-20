@@ -70,11 +70,25 @@ img,video{max-width:100%;display:block;}
 .read-more-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:.6rem 1.2rem;border-radius:30px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;}
 .read-more-btn:hover{border-color:var(--accent);color:var(--accent);}
 
-/* Gallery */
+/* Gallery & Animations */
 .project-gallery{max-width:1400px;margin:0 auto;padding:0 clamp(20px,5vw,80px) clamp(80px,10vw,120px);}
 .gallery-grid{columns: 3 300px; column-gap: clamp(20px,4vw,40px);}
-.gallery-item{break-inside: avoid; margin-bottom: clamp(20px,4vw,40px); border:1px solid var(--border); background:var(--surface); border-radius:16px; overflow:hidden; display: block;}
-.gallery-item img,.gallery-item video{width:100%; height:auto; display:block;}
+
+/* The reveal animation */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.gallery-item{break-inside: avoid; margin-bottom: clamp(20px,4vw,40px); border:1px solid var(--border); background:var(--surface); border-radius:16px; overflow:hidden; display: block; cursor: zoom-in;}
+.gallery-item img,.gallery-item video{width:100%; height:auto; display:block; transition: transform 0.3s ease;}
+.gallery-item:hover img,.gallery-item:hover video{ transform: scale(1.02); }
+
+/* Navigation (Next/Prev) */
+.project-nav{max-width:900px; margin:0 auto 80px; padding:0 clamp(20px,5vw,40px); display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:2rem;}
+.project-nav a{text-decoration:none; color:var(--text); display:flex; flex-direction:column; gap:.3rem; transition:color .2s;}
+.project-nav a:hover{color:var(--accent);}
+.project-nav .nav-label{font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted);}
+.project-nav .nav-title{font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:600;}
+.project-nav .nav-next{text-align:right;}
 
 /* Footer */
 .archive-footer{border-top:1px solid var(--border);padding:clamp(40px,6vw,60px) clamp(20px,5vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
@@ -85,6 +99,27 @@ img,video{max-width:100%;display:block;}
 .loading-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:1rem;color:var(--muted);}
 .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
+
+/* LIGHTBOX */
+.lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; cursor: zoom-out; }
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox-content { max-width: 90vw; max-height: 90vh; display: flex; align-items: center; justify-content: center; cursor: default; }
+.lightbox-content img, .lightbox-content video { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.lightbox-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: #fff; font-size: 2.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; z-index: 10; cursor: pointer;}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; z-index: 10; }
+.lightbox-nav:hover { background: var(--accent); border-color: var(--accent); }
+.lightbox-nav.prev { left: 2rem; }
+.lightbox-nav.next { right: 2rem; }
+@media (max-width: 768px) {
+  .lightbox-nav { width: 40px; height: 40px; font-size: 1rem; }
+  .lightbox-nav.prev { left: 1rem; }
+  .lightbox-nav.next { right: 1rem; }
+  .lightbox-close { top: 1rem; right: 1rem; }
+}
+
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }
 </style>
 </head>
 <body>
@@ -125,6 +160,14 @@ img,video{max-width:100%;display:block;}
   <span><a href="projects.html">View all projects →</a></span>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <button class="lightbox-nav prev" onclick="changeMedia(-1)"><i class="fas fa-arrow-left"></i></button>
+  <div class="lightbox-content" id="lightbox-content"></div>
+  <button class="lightbox-nav next" onclick="changeMedia(1)"><i class="fas fa-arrow-right"></i></button>
+</div>
+
 <script>
 document.getElementById('menu-year').textContent = new Date().getFullYear();
 document.getElementById('footer-year').textContent = new Date().getFullYear();
@@ -133,20 +176,10 @@ const USER='MawuliPRINCE';
 const REPO='my-portfolio-v2';
 const JSON_URL=`https://raw.githubusercontent.com/${USER}/${REPO}/main/projects.json`;
 
-// ===== THEME =====
-function toggleTheme(){
-  const dark=document.body.classList.contains('dark');
-  document.body.className=dark?'light':'dark';
-  localStorage.setItem('theme',dark?'light':'dark');
-}
-(function(){
-  const saved=localStorage.getItem('theme');
-  if(saved==='dark')document.body.classList.add('dark');
-  else if(saved==='light')document.body.classList.remove('dark');
-  else if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.body.classList.add('dark');
-})();
+// ===== THEME & MENU =====
+function toggleTheme(){ const dark=document.body.classList.contains('dark'); document.body.className=dark?'light':'dark'; localStorage.setItem('theme',dark?'light':'dark'); }
+(function(){ const saved=localStorage.getItem('theme'); if(saved==='dark')document.body.classList.add('dark'); else if(saved==='light')document.body.classList.remove('dark'); else if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.body.classList.add('dark'); })();
 
-// ===== MENU =====
 const menuEl=document.getElementById('menu'),backdrop=document.getElementById('menu-backdrop'),hamBtn=document.getElementById('hamburger');
 function openMenu(){menuEl.classList.add('open');backdrop.classList.add('open');hamBtn.classList.add('open');document.body.style.overflow='hidden';}
 function closeMenu(){menuEl.classList.remove('open');backdrop.classList.remove('open');hamBtn.classList.remove('open');document.body.style.overflow='';}
@@ -154,19 +187,8 @@ function toggleMenu(){menuEl.classList.contains('open')?closeMenu():openMenu();}
 
 // ===== HELPERS =====
 function isVideoUrl(url){return /\.(mp4|webm|mov|ogg)(\?|$)/i.test(url)||url.includes('/video/upload/');}
-function makeVideoWebSafe(url){
-  if(!url||typeof url!=='string')return url;
-  if(!url.includes('/video/upload/'))return url;
-  if(/vc_/.test(url))return url;
-  return url.replace('/video/upload/','/video/upload/vc_auto/');
-}
-function clOpt(url){
-  if(!url)return url;
-  if(url.includes('res.cloudinary.com')&&url.includes('/upload/')&&!url.includes('q_auto')){
-    return url.replace('/upload/','/upload/q_auto,f_auto,w_auto/');
-  }
-  return url;
-}
+function makeVideoWebSafe(url){ if(!url||typeof url!=='string')return url; if(!url.includes('/video/upload/'))return url; if(/vc_/.test(url))return url; return url.replace('/video/upload/','/video/upload/vc_auto/'); }
+function clOpt(url){ if(!url)return url; if(url.includes('res.cloudinary.com')&&url.includes('/upload/')&&!url.includes('q_auto')){ return url.replace('/upload/','/upload/q_auto,f_auto,w_auto/'); } return url; }
 
 // ===== TRUNCATE TOGGLE =====
 window.toggleDesc = function() {
@@ -183,33 +205,118 @@ window.toggleDesc = function() {
   }
 };
 
-// ===== LOAD =====
+// ===== SCROLL ANIMATIONS =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+// ===== LIGHTBOX LOGIC =====
+let currentMediaList = [];
+let currentMediaIndex = 0;
+const lightboxEl = document.getElementById('lightbox');
+
+window.openLightbox = function(index) {
+  currentMediaIndex = index;
+  renderLightboxMedia();
+  lightboxEl.classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeLightbox = function() {
+  lightboxEl.classList.remove('open');
+  document.getElementById('lightbox-content').innerHTML = '';
+  document.body.style.overflow = ''; 
+};
+
+window.changeMedia = function(dir) {
+  if (!currentMediaList.length) return;
+  currentMediaIndex = (currentMediaIndex + dir + currentMediaList.length) % currentMediaList.length;
+  renderLightboxMedia();
+};
+
+function renderLightboxMedia() {
+  const m = currentMediaList[currentMediaIndex];
+  if(!m) return;
+  const isVid = m.type === 'video' || isVideoUrl(m.url);
+  const container = document.getElementById('lightbox-content');
+  
+  if (isVid) {
+    container.innerHTML = `<video src="${makeVideoWebSafe(m.url)}" controls autoplay loop playsinline></video>`;
+  } else {
+    container.innerHTML = `<img src="${clOpt(m.url)}" alt="Media preview">`;
+  }
+}
+
+// ===== CLICK & SWIPE TO CLOSE/NAVIGATE =====
+let touchStartX = 0;
+let touchEndX = 0;
+
+lightboxEl.addEventListener('click', function(e) {
+  // If they clicked the dark background, close it. 
+  // (e.target is the background, e.currentTarget is the lightbox container)
+  if (e.target === lightboxEl || e.target.classList.contains('lightbox-content')) {
+    closeLightbox();
+  }
+});
+
+lightboxEl.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+}, {passive: true});
+
+lightboxEl.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchEndX < touchStartX - 50) changeMedia(1); // Swipe left
+    if (touchEndX > touchStartX + 50) changeMedia(-1); // Swipe right
+}, {passive: true});
+
+// ===== KEYBOARD NAVIGATION =====
+let currentProjectId = null;
+let prevUrl = null;
+let nextUrl = null;
+
+document.addEventListener('keydown', (e) => {
+  const isLightboxOpen = lightboxEl.classList.contains('open');
+  
+  if (isLightboxOpen) {
+    if (e.key === 'ArrowLeft') changeMedia(-1);
+    if (e.key === 'ArrowRight') changeMedia(1);
+    if (e.key === 'Escape') closeLightbox();
+  } else {
+    if (e.key === 'ArrowLeft' && prevUrl) window.location.href = prevUrl;
+    if (e.key === 'ArrowRight' && nextUrl) window.location.href = nextUrl;
+  }
+});
+
+// ===== LOAD PAGE =====
 window.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
-  const projectId = params.get('id');
+  currentProjectId = params.get('id');
   
-  if(!projectId){
-    document.getElementById('app').innerHTML = `<div class="loading-state" style="height:60vh;"><h2>Project not found</h2><a href="projects.html" style="color:var(--accent);margin-top:1rem;">Back to projects</a></div>`;
-    return;
-  }
+  if(!currentProjectId){ document.getElementById('app').innerHTML = `<div class="loading-state"><h2>Project not found</h2><a href="projects.html" style="color:var(--accent);">Back to projects</a></div>`; return; }
 
   try {
     const res = await fetch(JSON_URL + '?t=' + Date.now());
-    if(!res.ok) throw new Error('HTTP '+res.status);
     const allProjects = await res.json();
+    const project = allProjects.find(p => p.id === currentProjectId);
     
-    const project = allProjects.find(p => p.id === projectId);
-    
-    if(!project) {
-      document.getElementById('app').innerHTML = `<div class="loading-state" style="height:60vh;"><h2>Project not found</h2><a href="projects.html" style="color:var(--accent);margin-top:1rem;">Back to projects</a></div>`;
-      return;
-    }
+    if(!project) { document.getElementById('app').innerHTML = `<div class="loading-state"><h2>Project not found</h2><a href="projects.html" style="color:var(--accent);">Back to projects</a></div>`; return; }
+
+    const currentIndex = allProjects.findIndex(p => p.id === currentProjectId);
+    if(currentIndex > 0) prevUrl = 'project.html?id=' + allProjects[currentIndex - 1].id;
+    if(currentIndex < allProjects.length - 1) nextUrl = 'project.html?id=' + allProjects[currentIndex + 1].id;
 
     document.title = (project.seoTitle || project.title) + ' — Ismael Asumanu Prince';
     const metaDesc = document.querySelector('meta[name="description"]');
     if(metaDesc) metaDesc.setAttribute('content', project.seoDescription || project.subtitle || 'Case study by Ismael Asumanu Prince');
 
     const media = (project.media || []).filter(m => m.url);
+    currentMediaList = media; 
+    
     const desc = (project.description || '<p>No description provided.</p>').replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 
     const html = `
@@ -236,21 +343,25 @@ window.addEventListener('DOMContentLoaded', async () => {
       ${media.length ? `
       <section class="project-gallery">
         <div class="gallery-grid">
-          ${media.map(m => {
+          ${media.map((m, index) => {
             const isVid = m.type === 'video' || isVideoUrl(m.url);
-            return `<div class="gallery-item">
+            return `<div class="gallery-item reveal" onclick="openLightbox(${index})">
               ${isVid 
-                ? `<video src="${makeVideoWebSafe(m.url)}" muted loop autoplay playsinline controls disablepictureinpicture></video>`
+                ? `<video src="${makeVideoWebSafe(m.url)}" muted loop autoplay playsinline disablepictureinpicture></video>`
                 : `<img src="${clOpt(m.url)}" alt="${project.title} preview" loading="lazy">`}
             </div>`;
           }).join('')}
         </div>
       </section>` : ''}
+      
+      <div class="project-nav">
+        ${prevUrl ? `<a href="${prevUrl}"><span class="nav-label"><i class="fas fa-arrow-left"></i> Previous</span><span class="nav-title">${allProjects[currentIndex - 1].title}</span></a>` : `<div></div>`}
+        ${nextUrl ? `<a href="${nextUrl}" class="nav-next"><span class="nav-label">Next <i class="fas fa-arrow-right"></i></span><span class="nav-title">${allProjects[currentIndex + 1].title}</span></a>` : `<div></div>`}
+      </div>
     `;
 
     document.getElementById('app').innerHTML = html;
 
-    // Check if we actually need the Read More button
     setTimeout(() => {
       const descContent = document.getElementById('desc-content');
       const wrap = document.getElementById('read-more-wrap');
@@ -259,9 +370,11 @@ window.addEventListener('DOMContentLoaded', async () => {
       }
     }, 100);
 
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
   } catch(e) {
     console.error(e);
-    document.getElementById('app').innerHTML = `<div class="loading-state" style="height:60vh;"><h2>Error loading project</h2><p>Please try again later.</p><a href="projects.html" style="color:var(--accent);margin-top:1rem;">Back to projects</a></div>`;
+    document.getElementById('app').innerHTML = `<div class="loading-state"><h2>Error loading project</h2><p>Please try again later.</p><a href="projects.html" style="color:var(--accent);">Back to projects</a></div>`;
   }
 });
 </script>
