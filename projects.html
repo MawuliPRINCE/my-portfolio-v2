@@ -279,8 +279,11 @@
 .archive-btn-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1;}
 .archive-btn-hint{font-size:.6rem;font-weight:400;opacity:.75;letter-spacing:.03em;line-height:1;}
  (max-width:600px){.archive-btn{width:100%;justify-content:center;}}
+-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.3s; }
 </style>
   <!-- Analytics scripts can be inserted here if needed -->
+<link rel="prefetch" href="project.html">
 </head>
 <body>
   <div class="menu-backdrop" id="menu-backdrop" onclick="closeMenu()"></div>
@@ -515,7 +518,7 @@
           coverHTML = `<div class="card-cover-none">No Image</div>`;
         }
         return `
-          <div class="project-card" onclick="openModal('${esc(p.id)}')" style="animation-delay:${i*0.065}s">
+          <div class="project-card" onclick="window.location.href='project.html?id=${esc(p.id)}'" style="animation-delay:${i*0.065}s">
             ${coverHTML}
             <div class="card-body">
               <div class="card-body-left">
@@ -602,7 +605,7 @@
       wrap.addEventListener('click', (e) => {
         if (e.target.closest('.unmute-btn')) return;
         const activeSlide = wrap.querySelector('.slide.active');
-        if (activeSlide) openModal(activeSlide.dataset.id);
+        if (activeSlide) window.location.href = 'project.html?id=' + activeSlide.dataset.id;
       });
 
       dotsWrap.innerHTML = recents.map((_,i) => `<div class="dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`).join('');
@@ -737,7 +740,7 @@
         const relGrid = document.getElementById('related-grid');
         if (relGrid && related.length) {
           relGrid.innerHTML = related.map(r => `
-            <div class="related-card" onclick="closeModal();setTimeout(()=>openModal('${esc(r.id)}'),100)">
+            <div class="related-card" onclick="closeModal();setTimeout(()=>window.location.href='project.html?id=${esc(r.id)}',100)">
               ${getCover(r) ? `<img src="${clOpt(getCover(r))}" alt="${esc(r.title)}" loading="lazy">` : ''}
               <div class="related-card-title">${esc(r.title)}</div>
             </div>`).join('');
