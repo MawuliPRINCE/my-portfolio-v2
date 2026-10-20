@@ -108,7 +108,7 @@
     .project-card::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--accent); transition:width .4s; }
     .project-card:hover::after { width:100%; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-    .card-cover, .card-cover-video { width:100%; aspect-ratio:16/7; object-fit:cover; display:block; background:var(--surface); }
+    .card-cover, .card-cover-video { width:100%; height:auto; max-height:60vh; object-fit:cover; display:block; background:var(--surface); }
     .card-cover-none { width:100%; aspect-ratio:16/7; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.65rem; }
     .card-body { padding:clamp(16px,2.5vw,28px); display:flex; align-items:flex-start; gap:1rem; }
     .card-body-left { flex:1; min-width:0; }
@@ -158,12 +158,11 @@
 
     /* Gallery: full-size, no cropping */
     .modal-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: .85rem;
+      columns: 3 300px;
+      column-gap: .85rem;
       margin-top: 1rem;
     }
-    .gallery-item {
+    .gallery-item { break-inside: avoid; margin-bottom: .85rem;
       overflow: hidden;
       background: var(--surface);
       border: 1px solid var(--border);
@@ -501,7 +500,7 @@
         if (cover) {
           if (isVidCover) {
             coverHTML = `<div style="position:relative;">
-              <video class="card-cover-video" src="${esc(cover)}" muted loop autoplay playsinline disablepictureinpicture
+              <video class="card-cover-video" src="${esc(cover)}" muted loop autoplay playsinline disablepictureinpicture onerror="this.outerHTML='<div class='card-cover-none'>Video failed to load</div>'"
                 onerror="this.parentElement.innerHTML='<div class=\\'card-cover-none\\'>Video failed</div>'"></video>
               <button class="unmute-btn" style="position:absolute; top:8px; right:8px; z-index:10; background:rgba(0,0,0,0.6); border:none; width:44px; height:44px; font-size:1rem; display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; cursor:pointer;transition:background .2s;"
                 onclick="event.stopPropagation(); toggleCardVideoSound(this)" aria-label="Toggle video sound">
@@ -509,7 +508,7 @@
               </button>
             </div>`;
           } else {
-            coverHTML = `<img class="card-cover" src="${clOpt(cover)}" alt="${esc(p.title)}" loading="lazy"
+            coverHTML = `<img class="card-cover" src="${clOpt(cover)}" alt="${esc(p.title)}" loading="lazy" onerror="this.outerHTML='<div class='card-cover-none'>Image failed to load</div>'"
               onerror="this.parentElement.innerHTML='<div class=\\'card-cover-none\\'>Image failed</div>'">`;
           }
         } else {
