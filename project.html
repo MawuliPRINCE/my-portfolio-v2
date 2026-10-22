@@ -70,6 +70,22 @@ img,video{max-width:100%;display:block;}
 .read-more-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:.6rem 1.2rem;border-radius:30px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;}
 .read-more-btn:hover{border-color:var(--accent);color:var(--accent);}
 
+/* WEBSITE PREVIEW */
+.project-website{max-width:1200px; margin:0 auto clamp(60px,8vw,100px); padding:0 clamp(20px,5vw,80px);}
+.website-header{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:1rem;}
+.website-title{font-family:'Cormorant Garamond',serif; font-size:clamp(24px,3vw,36px); font-weight:600;}
+.website-btn{display:inline-flex; align-items:center; gap:0.5rem; background:var(--accent); color:#fff; padding:0.6rem 1.2rem; border-radius:30px; text-decoration:none; font-size:0.75rem; font-weight:600; transition:transform 0.2s; border:none; cursor:pointer;}
+.website-btn:hover{transform:translateY(-2px); background:#e03a00;}
+
+.browser-mockup{border:1px solid var(--border); border-radius:12px; overflow:hidden; background:var(--surface); box-shadow:0 20px 50px rgba(0,0,0,0.1);}
+.browser-bar{background:var(--bg); border-bottom:1px solid var(--border); padding:0.6rem 1rem; display:flex; align-items:center; gap:1rem;}
+.browser-dots{display:flex; gap:6px;}
+.browser-dots span{width:10px; height:10px; border-radius:50%; background:#ff5f56;}
+.browser-dots span:nth-child(2){background:#ffbd2e;}
+.browser-dots span:nth-child(3){background:#27c93f;}
+.browser-url{flex:1; background:var(--surface2); color:var(--muted); font-size:0.65rem; padding:0.3rem 0.8rem; border-radius:20px; text-align:center; font-family:monospace;}
+.browser-iframe{width:100%; height:600px; border:none; background:#fff;}
+
 /* Gallery & Animations */
 .project-gallery{max-width:1400px;margin:0 auto;padding:0 clamp(20px,5vw,80px) clamp(80px,10vw,120px);}
 .gallery-grid{columns: 3 300px; column-gap: clamp(20px,4vw,40px);}
@@ -99,18 +115,12 @@ img,video{max-width:100%;display:block;}
 .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* LIGHTBOX - RECONSTRUCTED FOR RELIABILITY */
+/* LIGHTBOX */
 .lightbox { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .lightbox.open { opacity: 1; pointer-events: all; }
-
-/* The dark background layer */
 .lightbox-backdrop { position: absolute; inset: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); cursor: zoom-out; z-index: 1; }
-
-/* The container for the image */
 .lightbox-content { position: relative; z-index: 2; pointer-events: none; max-width: 90vw; max-height: 90vh; display: flex; align-items: center; justify-content: center; }
 .lightbox-content img, .lightbox-content video { pointer-events: auto; max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-
-/* Buttons float above everything */
 .lightbox-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: #fff; font-size: 2.5rem; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; z-index: 10; }
 .lightbox-close:hover { opacity: 1; }
 .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; z-index: 10; }
@@ -123,6 +133,8 @@ img,video{max-width:100%;display:block;}
   .lightbox-nav.prev { left: 1rem; }
   .lightbox-nav.next { right: 1rem; }
   .lightbox-close { top: 1rem; right: 1rem; }
+  .browser-iframe { height: 400px; }
+  .website-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
 
 @view-transition { navigation: auto; }
@@ -169,11 +181,8 @@ img,video{max-width:100%;display:block;}
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <!-- This empty div handles the click-to-close entirely by itself -->
   <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
-  
   <div class="lightbox-content" id="lightbox-content"></div>
-  
   <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
   <button class="lightbox-nav prev" onclick="changeMedia(-1)"><i class="fas fa-arrow-left"></i></button>
   <button class="lightbox-nav next" onclick="changeMedia(1)"><i class="fas fa-arrow-right"></i></button>
@@ -235,7 +244,7 @@ window.openLightbox = function(index) {
   currentMediaIndex = index;
   renderLightboxMedia();
   lightboxEl.classList.add('open');
-  document.body.style.overflow = 'hidden'; // Lock background scroll
+  document.body.style.overflow = 'hidden'; 
 };
 
 window.closeLightbox = function() {
@@ -267,14 +276,11 @@ function renderLightboxMedia() {
 let touchStartX = 0;
 let touchEndX = 0;
 
-lightboxEl.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-}, {passive: true});
-
+lightboxEl.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
 lightboxEl.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
-    if (touchEndX < touchStartX - 50) changeMedia(1); // Swipe left
-    if (touchEndX > touchStartX + 50) changeMedia(-1); // Swipe right
+    if (touchEndX < touchStartX - 50) changeMedia(1); 
+    if (touchEndX > touchStartX + 50) changeMedia(-1); 
 }, {passive: true});
 
 // ===== KEYBOARD NAVIGATION =====
@@ -321,6 +327,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     currentMediaList = media; 
     
     const desc = (project.description || '<p>No description provided.</p>').replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+    const websiteUrl = project.link || project.previewUrl || null; // Check for a website URL
 
     const html = `
       <section class="project-hero">
@@ -342,6 +349,21 @@ window.addEventListener('DOMContentLoaded', async () => {
         </div>
         ${project.clientTestimonial ? `<div style="margin-top:3rem;padding:2rem;border-left:3px solid var(--accent);background:var(--accent-light);font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;">“${project.clientTestimonial}”</div>` : ''}
       </section>
+
+      ${websiteUrl ? `
+      <section class="project-website reveal">
+        <div class="website-header">
+          <h2 class="website-title">Experience the Live Website</h2>
+          <a href="${websiteUrl}" target="_blank" rel="noopener" class="website-btn">Visit Site <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="browser-mockup">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">${websiteUrl.replace('https://', '').replace('http://', '').split('/')[0]}</div>
+          </div>
+          <iframe src="${websiteUrl}" class="browser-iframe" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+        </div>
+      </section>` : ''}
 
       ${media.length ? `
       <section class="project-gallery">
