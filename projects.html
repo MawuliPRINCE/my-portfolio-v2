@@ -389,7 +389,7 @@
   <script>
     const USER = 'MawuliPRINCE';
     const REPO = 'my-portfolio';
-    const JSON_URL = `https://raw.githubusercontent.com/${USER}/${REPO}/main/projects.json`;
+    const JSON_URL = `https://raw.githubusercontent.com/${USER}/${REPO}/main/projects.json?t=${Date.now()}`;
 
     let allProjects = [], projectsOnly = [], filtered = [], recents = [];
     let activeFilter = 'All', currentSlide = 0, rafId = null, progressStart = null;

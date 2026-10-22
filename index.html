@@ -706,7 +706,7 @@
             Object.entries(socials).forEach(([id,href]) => { if(href) document.getElementById(id).href = href; });
 
             if (d.contactDesc) document.getElementById('footer-desc').textContent = d.contactDesc;
-            if (d.role) document.getElementById('hero-role').textContent = d.role;
+            if (d.role) { document.getElementById("hero-role").textContent = d.role; console.log("Role updated to:", d.role); }
           })
           .catch(() => {});
 
@@ -759,7 +759,7 @@
             const t = i18n[lang] || i18n.en;
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (t[key] !== undefined) el.innerHTML = t[key];
+                if (t[key] !== undefined && key !== "hero-role") el.innerHTML = t[key];
             });
             document.documentElement.lang = lang;
         }
